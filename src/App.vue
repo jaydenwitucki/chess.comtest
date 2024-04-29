@@ -1,26 +1,80 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+  <div id="app">
+    <!-- <PlayerInfo :player= "playerData" /> -->
+     <div class="flex-container">
+        <ChessBoard v-on:handleSquareClick="storeSelectedSquares($event)"/>
+        <SideBar v-bind:selected-squares="selectedSquares"/>
+     </div>
+  </div>
+ </template>
+
+
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChessBoard from './components/ChessBoard.vue'
+//import PlayerInfo from './components/PlayerInfo.vue';
+import SideBar from './components/SideBar.vue'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ChessBoard,
+    SideBar,
+    //PlayerInfo,
+},
+  data(){
+    return {
+      selectedSquares:[],
+      //playerData: {
+        //name: 'Mittens',
+        //rating: '500',
+        //title: 'USA',
+        //avatar: '/meow.jpg', 
+      //},
+    };
+  },
+  methods: {
+    storeSelectedSquares: function(selectedSquares) {
+      this.selectedSquares = selectedSquares;
+    }
   }
-}
+};
 </script>
 
 <style>
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Times New Roman', Times, serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 0;
+  background-color: #818589;
+}
+
+.flex-container {
+ position: absolute;
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+ height: 100%;
+ width: 100%;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 600px) {
+  .flex-container{
+    flex-direction: column;
+    justify-content: center;
+  }
+  
 }
 </style>
